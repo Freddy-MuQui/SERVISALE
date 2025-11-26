@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import cl.duoc.basico.repository.AppDatabase
 import cl.duoc.basico.ui.components.ItemCarritoCard
 import cl.duoc.basico.viewmodel.CarritoViewModel
+import cl.duoc.basico.utils.convertirAPesosChilenos
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -25,6 +26,10 @@ fun CarritoScreen(
 ) {
     val carritoViewModel = remember { CarritoViewModel(db.carritoDao(), usuarioActual) }
     val carrito by carritoViewModel.carrito.collectAsState()
+
+    // Calcula subtotal en CLP sumando todos los productos y sus cantidades
+    val subtotalClp = carrito.sumOf { item -> convertirAPesosChilenos(item.precio) * item.cantidad }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -52,11 +57,20 @@ fun CarritoScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(Icons.Default.ShoppingCart, contentDescription = null, modifier = Modifier.size(80.dp), tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f))
+                    Icon(
+                        Icons.Default.ShoppingCart,
+                        contentDescription = null,
+                        modifier = Modifier.size(80.dp),
+                        tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)
+                    )
                     Spacer(modifier = Modifier.height(16.dp))
                     Text("Tu carrito está vacío", style = MaterialTheme.typography.titleMedium)
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text("Agrega productos para continuar", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
+                    Text(
+                        "Agrega productos para continuar",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                    )
                 }
             }
         } else {
@@ -74,24 +88,48 @@ fun CarritoScreen(
                         )
                     }
                 }
-                Divider(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp), thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
-                Surface(modifier = Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.surfaceVariant, tonalElevation = 4.dp) {
+                Divider(
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.outlineVariant
+                )
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = MaterialTheme.colorScheme.surfaceVariant,
+                    tonalElevation = 4.dp
+                ) {
                     Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
                         Row(
                             modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text("Subtotal:", style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                            Text("$${carritoViewModel.calcularTotal()}", style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Text(
+                                "Subtotal:",
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            Text(
+                                "$subtotalClp CLP",
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
                         }
                         Row(
                             modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text("Total:", style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.onSurface)
-                            Text("$${carritoViewModel.calcularTotal()}", style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.primary)
+                            Text(
+                                "Total:",
+                                style = MaterialTheme.typography.titleLarge,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                            Text(
+                                "$subtotalClp CLP", // Mismo valor, puedes cambiar si tienes descuentos o envío
+                                style = MaterialTheme.typography.titleLarge,
+                                color = MaterialTheme.colorScheme.primary
+                            )
                         }
                         Spacer(modifier = Modifier.height(8.dp))
                         Button(

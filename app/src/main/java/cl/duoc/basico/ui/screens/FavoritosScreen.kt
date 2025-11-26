@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cl.duoc.basico.repository.AppDatabase
 import cl.duoc.basico.viewmodel.FavoritoViewModel
+import cl.duoc.basico.viewmodel.FavoritoViewModelFactory
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -21,8 +23,11 @@ fun FavoritosScreen(
     usuarioActual: String,
     onBack: () -> Unit
 ) {
-    val favoritoViewModel = remember { FavoritoViewModel(db.favoritoDao(), usuarioActual) }
+    val favoritoViewModel: FavoritoViewModel = viewModel(
+        factory = FavoritoViewModelFactory(db.favoritoDao(), usuarioActual)
+    )
     val favoritos by favoritoViewModel.favoritos.collectAsState()
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -41,7 +46,12 @@ fun FavoritosScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(Icons.Default.Favorite, contentDescription = null, modifier = Modifier.size(64.dp), tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f))
+                    Icon(
+                        Icons.Default.Favorite,
+                        contentDescription = null,
+                        modifier = Modifier.size(64.dp),
+                        tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)
+                    )
                     Spacer(modifier = Modifier.height(16.dp))
                     Text("No tienes favoritos aún", style = MaterialTheme.typography.titleMedium)
                 }
@@ -61,7 +71,11 @@ fun FavoritosScreen(
                         ) {
                             Text(favorito.producto, style = MaterialTheme.typography.titleMedium)
                             IconButton(onClick = { favoritoViewModel.toggleFavorito(favorito.producto) }) {
-                                Icon(Icons.Default.Favorite, contentDescription = "Eliminar", tint = MaterialTheme.colorScheme.error)
+                                Icon(
+                                    Icons.Default.Favorite,
+                                    contentDescription = "Eliminar",
+                                    tint = MaterialTheme.colorScheme.error
+                                )
                             }
                         }
                     }

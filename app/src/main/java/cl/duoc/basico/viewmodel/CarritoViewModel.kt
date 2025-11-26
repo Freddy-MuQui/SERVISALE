@@ -6,7 +6,6 @@ import cl.duoc.basico.model.ItemCarrito
 import cl.duoc.basico.repository.CarritoDao
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CarritoViewModel(
@@ -14,38 +13,26 @@ class CarritoViewModel(
     private val usuarioActual: String
 ) : ViewModel() {
 
-    // Categorías de productos comestibles
-    private val categoriasComestibles = listOf("despensa", "snacks", "frutas", "carnes", "bebidas", "lácteos", "panadería", "congelados")
-
-    private val _carrito = MutableStateFlow<List<ItemCarrito>>(emptyList()) // Estado interno del carrito por usuario.
-    private val _carritoComestibles = MutableStateFlow<List<ItemCarrito>>(emptyList()) // Carrito filtrado solo con productos comestibles.
-    
-    // Exposición inmutable para la UI - solo productos comestibles
-    val carrito: StateFlow<List<ItemCarrito>> = _carritoComestibles
+    private val _carrito: MutableStateFlow<List<ItemCarrito>> = MutableStateFlow(emptyList())
+    val carrito: StateFlow<List<ItemCarrito>> = _carrito
 
     init {
-        viewModelScope.launch { // Suscripción al carrito del usuario actual.
+        cargarCarrito()
+    }
+
+    fun cargarCarrito() {
+        viewModelScope.launch {
             carritoDao.getCarritoByUsuario(usuarioActual).collect { lista ->
-                _carrito.value = lista // Sincroniza estado local con la BD.
-                // Filtrar solo productos comestibles
-                _carritoComestibles.value = lista.filter { item ->
-                    item.categoria.isNotBlank() && 
-                    categoriasComestibles.contains(item.categoria.lowercase()) 
-                }
+                _carrito.value = lista
             }
         }
     }
 
     fun agregarProducto(productoId: Int, nombre: String, precio: Float, categoria: String) {
-        viewModelScope.launch { // Mutación del carrito en BD.
-            // Solo agregar si es un producto comestible
-            if (!categoriasComestibles.contains(categoria.lowercase())) {
-                return@launch
-            }
-            
+        viewModelScope.launch {
             val itemExistente = _carrito.value.find { it.productoId == productoId }
             if (itemExistente != null) {
-                carritoDao.actualizarCantidad(itemExistente.id, itemExistente.cantidad + 1) // Incrementa cantidad.
+                carritoDao.actualizarCantidad(itemExistente.id, itemExistente.cantidad + 1)
             } else {
                 carritoDao.agregarAlCarrito(
                     ItemCarrito(
@@ -55,7 +42,7 @@ class CarritoViewModel(
                         cantidad = 1,
                         usuario = usuarioActual,
                         categoria = categoria
-                    ) // Inserta nuevo ítem para el usuario actual.
+                    )
                 )
             }
         }
@@ -63,28 +50,27 @@ class CarritoViewModel(
 
     fun eliminarItem(itemId: Int) {
         viewModelScope.launch {
-            carritoDao.eliminarDelCarrito(itemId) // Elimina ítem por ID.
+            carritoDao.eliminarDelCarrito(itemId)
         }
     }
 
     fun actualizarCantidad(itemId: Int, nuevaCantidad: Int) {
         viewModelScope.launch {
             if (nuevaCantidad > 0) {
-                carritoDao.actualizarCantidad(itemId, nuevaCantidad) // Actualiza cantidad válida.
+                carritoDao.actualizarCantidad(itemId, nuevaCantidad)
             } else {
-                carritoDao.eliminarDelCarrito(itemId) // Si llega a 0, elimina el ítem.
+                carritoDao.eliminarDelCarrito(itemId)
             }
         }
     }
 
     fun vaciarCarrito() {
         viewModelScope.launch {
-            carritoDao.vaciarCarrito(usuarioActual) // Borra todos los ítems del usuario.
+            carritoDao.vaciarCarrito(usuarioActual)
         }
     }
 
     fun calcularTotal(): Float {
-        // Calcular total solo de productos comestibles
-        return _carritoComestibles.value.sumOf { (it.precio * it.cantidad).toDouble() }.toFloat() // Suma total acumulada.
+        return _carrito.value.sumOf { (it.precio * it.cantidad).toDouble() }.toFloat()
     }
 }

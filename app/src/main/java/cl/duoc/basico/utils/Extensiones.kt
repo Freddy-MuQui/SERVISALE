@@ -8,6 +8,12 @@ fun Date.formatoParaMostrar(): String {
     return formato.format(this) // Convierte Date a String para UI.
 }
 
+fun convertirAPesosChilenos(precioUsd: Float): Int {
+    val tasaCambio = 930f // valor aproximado, puedes ajustarlo
+    return (precioUsd * tasaCambio).toInt()
+}
+
+
 fun Date.soloFecha(): String {
     val formato = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()) // Solo fecha.
     return formato.format(this) // Formatea sin hora.

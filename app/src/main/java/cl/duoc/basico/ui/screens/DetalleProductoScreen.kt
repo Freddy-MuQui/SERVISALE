@@ -24,18 +24,24 @@ fun DetalleProductoScreen(
     onBack: () -> Unit,
     onVerMapa: () -> Unit
 ) {
-    val productoViewModel = remember { ProductoViewModel() } // Fuente de producto.
-    val carritoViewModel = remember { CarritoViewModel(db.carritoDao(), usuarioActual) } // Carrito por usuario.
-    val favoritoViewModel = remember { FavoritoViewModel(db.favoritoDao(), usuarioActual) } // Favoritos por usuario.
-
-    LaunchedEffect(productoId) {
-        productoViewModel.obtenerProductoPorId(productoId) // Carga diferida por ID.
+    // Definir aquí la función de conversión
+    fun convertirAPesosChilenos(precioUsd: Float): Int {
+        val tasaCambio = 930f
+        return (precioUsd * tasaCambio).toInt()
     }
 
-    val producto by productoViewModel.productoSeleccionado.collectAsState() // Producto observado.
-    val favoritos by favoritoViewModel.favoritos.collectAsState() // Lista de favoritos para icono.
-    var cantidadSeleccionada by remember { mutableStateOf(1) } // Cantidad a agregar.
-    
+    val productoViewModel = remember { ProductoViewModel() }
+    val carritoViewModel = remember { CarritoViewModel(db.carritoDao(), usuarioActual) }
+    val favoritoViewModel = remember { FavoritoViewModel(db.favoritoDao(), usuarioActual) }
+
+    LaunchedEffect(productoId) {
+        productoViewModel.obtenerProductoPorId(productoId)
+    }
+
+    val producto by productoViewModel.productoSeleccionado.collectAsState()
+    val favoritos by favoritoViewModel.favoritos.collectAsState()
+    var cantidadSeleccionada by remember { mutableStateOf(1) }
+
     val context = LocalContext.current
 
     Scaffold(
@@ -51,6 +57,10 @@ fun DetalleProductoScreen(
         }
     ) { padding ->
         if (producto != null) {
+
+            val precioClp = convertirAPesosChilenos(producto!!.precio)
+            val precioFormateado = "%,d".format(precioClp)
+
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -59,7 +69,6 @@ fun DetalleProductoScreen(
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Column {
-                    // Encabezado
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
@@ -78,7 +87,7 @@ fun DetalleProductoScreen(
                         }
                         IconButton(
                             onClick = {
-                                favoritoViewModel.toggleFavorito(producto!!.nombre) // Alterna favorito por nombre.
+                                favoritoViewModel.toggleFavorito(producto!!.nombre)
                             }
                         ) {
                             Icon(
@@ -94,8 +103,6 @@ fun DetalleProductoScreen(
                     }
 
                     Spacer(modifier = Modifier.height(24.dp))
-
-                    // Información del producto
                     Card(
                         modifier = Modifier.fillMaxWidth()
                     ) {
@@ -106,7 +113,7 @@ fun DetalleProductoScreen(
                             ) {
                                 Text("Precio:", style = MaterialTheme.typography.titleMedium)
                                 Text(
-                                    "$${producto!!.precio}",
+                                    "$precioFormateado CLP",
                                     style = MaterialTheme.typography.titleMedium,
                                     color = MaterialTheme.colorScheme.primary
                                 )
@@ -140,10 +147,7 @@ fun DetalleProductoScreen(
                             )
                         }
                     }
-
                     Spacer(modifier = Modifier.height(24.dp))
-
-                    // Cantidad
                     Card(
                         modifier = Modifier.fillMaxWidth()
                     ) {
@@ -157,7 +161,7 @@ fun DetalleProductoScreen(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 IconButton(onClick = {
-                                    if (cantidadSeleccionada > 1) cantidadSeleccionada-- // Limita inferior.
+                                    if (cantidadSeleccionada > 1) cantidadSeleccionada--
                                 }) {
                                     Icon(Icons.Default.Remove, "Reducir")
                                 }
@@ -167,7 +171,7 @@ fun DetalleProductoScreen(
                                 )
                                 IconButton(onClick = {
                                     if (cantidadSeleccionada < producto!!.cantidadDisponible)
-                                        cantidadSeleccionada++ // Limita superior por stock.
+                                        cantidadSeleccionada++
                                 }) {
                                     Icon(Icons.Default.Add, "Aumentar")
                                 }
@@ -175,8 +179,6 @@ fun DetalleProductoScreen(
                         }
                     }
                 }
-
-                // Botones de acción
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -184,7 +186,7 @@ fun DetalleProductoScreen(
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Button(
-                        onClick = { onVerMapa() }, // Emite navegación a mapa.
+                        onClick = { onVerMapa() },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(48.dp),
@@ -194,15 +196,14 @@ fun DetalleProductoScreen(
                         Spacer(modifier = Modifier.width(8.dp))
                         Text("Ver en mapa")
                     }
-
                     Button(
                         onClick = {
                             carritoViewModel.agregarProducto(
                                 producto!!.idProducto,
                                 producto!!.nombre,
-                                producto!!.precio,
+                                precioClp.toFloat(),
                                 producto!!.categoria
-                            ) // Inserta/actualiza ítem en carrito solo si es comestible.
+                            )
                             Toast.makeText(
                                 context,
                                 "Producto agregado al carrito",
@@ -224,7 +225,7 @@ fun DetalleProductoScreen(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator() // Loading mientras se obtiene el producto.
+                CircularProgressIndicator()
             }
         }
     }

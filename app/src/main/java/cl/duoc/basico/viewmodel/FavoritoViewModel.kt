@@ -13,16 +13,16 @@ class FavoritoViewModel(
     private val usuarioActual: String
 ) : ViewModel() {
 
-    private val _favoritos = MutableStateFlow<List<Favorito>>(emptyList()) // Estado local de favoritos por usuario.
-    val favoritos: StateFlow<List<Favorito>> = _favoritos // Exposición inmutable para UI.
+    private val _favoritos = MutableStateFlow<List<Favorito>>(emptyList())
+    val favoritos: StateFlow<List<Favorito>> = _favoritos
 
     init {
-        cargarFavoritos() // Carga inicial para mostrar lista.
+        cargarFavoritos()
     }
 
     private fun cargarFavoritos() {
         viewModelScope.launch {
-            _favoritos.value = favoritoDao.getAllByUsuario(usuarioActual) // Consulta por usuario.
+            _favoritos.value = favoritoDao.getAllByUsuario(usuarioActual)
         }
     }
 
@@ -30,15 +30,15 @@ class FavoritoViewModel(
         viewModelScope.launch {
             val favoritoExistente = _favoritos.value.find { it.producto == productoNombre }
             if (favoritoExistente != null) {
-                favoritoDao.delete(favoritoExistente) // Elimina si ya existe.
+                favoritoDao.delete(favoritoExistente)
             } else {
-                favoritoDao.insert(Favorito(usuario = usuarioActual, producto = productoNombre)) // Inserta si no está.
+                favoritoDao.insert(Favorito(usuario = usuarioActual, producto = productoNombre))
             }
-            cargarFavoritos() // Refresca estado tras mutación.
+            cargarFavoritos()
         }
     }
 
     fun esFavorito(productoNombre: String): Boolean {
-        return _favoritos.value.any { it.producto == productoNombre } // Comprobación rápida en memoria.
+        return _favoritos.value.any { it.producto == productoNombre }
     }
 }
