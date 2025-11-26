@@ -1,0 +1,5 @@
+-keep class cl.duoc.basico.network.** { *; }
+-keep class com.google.gson.** { *; }
+-keep class retrofit2.** { *; }
+-keepattributes Signature
+-keepattributes *Annotation*
