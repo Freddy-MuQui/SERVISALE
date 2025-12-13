@@ -11,5 +11,6 @@ data class ItemCarrito(
     val precio: Float,
     val cantidad: Int,
     val usuario: String,
-    val categoria: String
+    val categoria: String,
+    val imagenUrl: String? = null // dejarlo nullable y con valor por defecto
 )

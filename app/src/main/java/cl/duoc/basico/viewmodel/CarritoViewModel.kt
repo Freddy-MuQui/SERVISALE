@@ -13,7 +13,7 @@ class CarritoViewModel(
     private val usuarioActual: String
 ) : ViewModel() {
 
-    private val _carrito: MutableStateFlow<List<ItemCarrito>> = MutableStateFlow(emptyList())
+    private val _carrito = MutableStateFlow<List<ItemCarrito>>(emptyList())
     val carrito: StateFlow<List<ItemCarrito>> = _carrito
 
     init {
@@ -28,29 +28,42 @@ class CarritoViewModel(
         }
     }
 
-    fun agregarProducto(productoId: Int, nombre: String, precio: Float, categoria: String) {
+    fun agregarProducto(
+        productoId: Int,
+        nombre: String,
+        precio: Float,
+        categoria: String,
+        cantidad: Int = 1,
+        imagenUrl: String          // NUEVO PARÁMETRO
+    ) {
         viewModelScope.launch {
-            val itemExistente = _carrito.value.find { it.productoId == productoId }
+            val itemExistente =
+                carritoDao.obtenerItemPorProductoYUsuario(productoId, usuarioActual)
+
             if (itemExistente != null) {
-                carritoDao.actualizarCantidad(itemExistente.id, itemExistente.cantidad + 1)
+                val nuevaCantidad = itemExistente.cantidad + cantidad
+                carritoDao.actualizarCantidad(itemExistente.id, nuevaCantidad)
             } else {
-                carritoDao.agregarAlCarrito(
-                    ItemCarrito(
-                        productoId = productoId,
-                        nombreProducto = nombre,
-                        precio = precio,
-                        cantidad = 1,
-                        usuario = usuarioActual,
-                        categoria = categoria
-                    )
+                val nuevoItem = ItemCarrito(
+                    productoId = productoId,
+                    nombreProducto = nombre,
+                    precio = precio,
+                    cantidad = cantidad,
+                    usuario = usuarioActual,
+                    categoria = categoria,
+                    imagenUrl = imagenUrl
                 )
+                carritoDao.agregarAlCarrito(nuevoItem)
             }
+
+            cargarCarrito()
         }
     }
 
     fun eliminarItem(itemId: Int) {
         viewModelScope.launch {
             carritoDao.eliminarDelCarrito(itemId)
+            cargarCarrito()
         }
     }
 
@@ -61,16 +74,18 @@ class CarritoViewModel(
             } else {
                 carritoDao.eliminarDelCarrito(itemId)
             }
+            cargarCarrito()
         }
     }
 
     fun vaciarCarrito() {
         viewModelScope.launch {
             carritoDao.vaciarCarrito(usuarioActual)
+            cargarCarrito()
         }
     }
 
     fun calcularTotal(): Float {
-        return _carrito.value.sumOf { (it.precio * it.cantidad).toDouble() }.toFloat()
+        return carrito.value.sumOf { it.precio * it.cantidad.toDouble() }.toFloat()
     }
 }

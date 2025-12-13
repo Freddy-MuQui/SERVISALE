@@ -16,10 +16,11 @@ import cl.duoc.basico.model.*
         Comuna::class,
         ItemCarrito::class
     ],
-    version = 4, // Actualizado para agregar campo categoria a ItemCarrito
+    version = 5, // sube en +1 al agregar imagenUrl o cualquier cambio
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
+
     abstract fun productoDao(): ProductoDao
     abstract fun usuarioDao(): UsuarioDao
     abstract fun favoritoDao(): FavoritoDao
@@ -29,6 +30,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun carritoDao(): CarritoDao
 
     companion object {
+
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
@@ -39,7 +41,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "compara_precio_db"
                 )
-                    .fallbackToDestructiveMigration() // Esto fuerza recreación si los cambios son incompatibles
+                    .fallbackToDestructiveMigration() // mantiene tu comportamiento actual
                     .build()
                 INSTANCE = instance
                 instance

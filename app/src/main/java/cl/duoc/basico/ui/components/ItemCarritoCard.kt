@@ -5,6 +5,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import cl.duoc.basico.utils.convertirAPesosChilenos
 import cl.duoc.basico.model.ItemCarrito
 
@@ -15,34 +20,56 @@ fun ItemCarritoCard(
     onEliminar: () -> Unit
 ) {
     val precioClp = convertirAPesosChilenos(item.precio)
+    val context = LocalContext.current
+    val urlImagen = item.imagenUrl?.takeIf { it.isNotBlank() }
+
     Card(
-        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp)
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
-            Text("Producto: ${item.nombreProducto}", style = MaterialTheme.typography.titleMedium)
+
+            if (urlImagen != null) {
+                AsyncImage(
+                    model = ImageRequest.Builder(context)
+                        .data(urlImagen)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = item.nombreProducto,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(120.dp)
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+
+            Text(
+                "Producto: ${item.nombreProducto}",
+                style = MaterialTheme.typography.titleMedium
+            )
             Spacer(modifier = Modifier.height(4.dp))
             Text("Precio: $precioClp CLP")
             Spacer(modifier = Modifier.height(4.dp))
             Text("Cantidad:")
             Row(
-                verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+                verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(vertical = 4.dp)
             ) {
-                Button(
-                    onClick = { onCantidadChange(item.cantidad - 1) },
-                    enabled = item.cantidad > 1,
-                    modifier = Modifier.size(36.dp)
+                OutlinedButton(
+                    onClick = { if (item.cantidad > 1) onCantidadChange(item.cantidad - 1) },
+                    enabled = item.cantidad > 1
                 ) {
-                    Text("\u2212") // Unicode U+2212 ("−") símbolo menos
+                    Text(text = "-")
                 }
                 Spacer(modifier = Modifier.width(8.dp))
                 Text("${item.cantidad}", style = MaterialTheme.typography.bodyLarge)
                 Spacer(modifier = Modifier.width(8.dp))
-                Button(
-                    onClick = { onCantidadChange(item.cantidad + 1) },
-                    modifier = Modifier.size(36.dp)
+                OutlinedButton(
+                    onClick = { onCantidadChange(item.cantidad + 1) }
                 ) {
-                    Text("+") // símbolo más
+                    Text(text = "+")
                 }
             }
             Spacer(modifier = Modifier.height(4.dp))

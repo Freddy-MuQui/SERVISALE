@@ -7,8 +7,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import android.widget.Toast
 import cl.duoc.basico.repository.AppDatabase
 import cl.duoc.basico.viewmodel.CarritoViewModel
@@ -24,7 +24,6 @@ fun DetalleProductoScreen(
     onBack: () -> Unit,
     onVerMapa: () -> Unit
 ) {
-    // Definir aquí la función de conversión
     fun convertirAPesosChilenos(precioUsd: Float): Int {
         val tasaCambio = 930f
         return (precioUsd * tasaCambio).toInt()
@@ -50,15 +49,16 @@ fun DetalleProductoScreen(
                 title = { Text("Detalle del Producto") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.Default.ArrowBack, "Volver")
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Volver")
                     }
                 }
             )
         }
     ) { padding ->
-        if (producto != null) {
+        val p = producto
+        if (p != null) {
 
-            val precioClp = convertirAPesosChilenos(producto!!.precio)
+            val precioClp = convertirAPesosChilenos(p.precio)
             val precioFormateado = "%,d".format(precioClp)
 
             Column(
@@ -76,33 +76,32 @@ fun DetalleProductoScreen(
                     ) {
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
-                                producto!!.nombre,
+                                text = p.nombre,
                                 style = MaterialTheme.typography.headlineSmall
                             )
                             Spacer(modifier = Modifier.height(4.dp))
                             Text(
-                                "Categoría: ${producto!!.categoria}",
+                                text = "Categoría: ${p.categoria}",
                                 style = MaterialTheme.typography.bodySmall
                             )
                         }
                         IconButton(
-                            onClick = {
-                                favoritoViewModel.toggleFavorito(producto!!.nombre)
-                            }
+                            onClick = { favoritoViewModel.toggleFavorito(p.nombre) }
                         ) {
+                            val esFav = favoritos.any { it.producto == p.nombre }
                             Icon(
-                                if (favoritos.any { it.producto == producto!!.nombre })
-                                    Icons.Default.Favorite
-                                else
-                                    Icons.Default.FavoriteBorder,
+                                imageVector = if (esFav) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                                 contentDescription = "Favorito",
-                                tint = if (favoritos.any { it.producto == producto!!.nombre })
-                                    MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.outline
+                                tint = if (esFav)
+                                    MaterialTheme.colorScheme.error
+                                else
+                                    MaterialTheme.colorScheme.outline
                             )
                         }
                     }
 
                     Spacer(modifier = Modifier.height(24.dp))
+
                     Card(
                         modifier = Modifier.fillMaxWidth()
                     ) {
@@ -113,7 +112,7 @@ fun DetalleProductoScreen(
                             ) {
                                 Text("Precio:", style = MaterialTheme.typography.titleMedium)
                                 Text(
-                                    "$precioFormateado CLP",
+                                    text = "$precioFormateado CLP",
                                     style = MaterialTheme.typography.titleMedium,
                                     color = MaterialTheme.colorScheme.primary
                                 )
@@ -125,7 +124,7 @@ fun DetalleProductoScreen(
                             ) {
                                 Text("Supermercado:", style = MaterialTheme.typography.bodyMedium)
                                 Text(
-                                    producto!!.supermercado,
+                                    text = p.supermercado,
                                     style = MaterialTheme.typography.bodyMedium
                                 )
                             }
@@ -136,18 +135,20 @@ fun DetalleProductoScreen(
                             ) {
                                 Text("Disponible:", style = MaterialTheme.typography.bodyMedium)
                                 Text(
-                                    "${producto!!.cantidadDisponible} unidades",
+                                    text = "${p.cantidadDisponible} unidades",
                                     style = MaterialTheme.typography.bodyMedium
                                 )
                             }
                             Spacer(modifier = Modifier.height(12.dp))
                             Text(
-                                producto!!.descripcion,
+                                text = p.descripcion,
                                 style = MaterialTheme.typography.bodySmall
                             )
                         }
                     }
+
                     Spacer(modifier = Modifier.height(24.dp))
+
                     Card(
                         modifier = Modifier.fillMaxWidth()
                     ) {
@@ -160,25 +161,30 @@ fun DetalleProductoScreen(
                                 horizontalArrangement = Arrangement.SpaceEvenly,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                IconButton(onClick = {
-                                    if (cantidadSeleccionada > 1) cantidadSeleccionada--
-                                }) {
-                                    Icon(Icons.Default.Remove, "Reducir")
+                                IconButton(
+                                    onClick = {
+                                        if (cantidadSeleccionada > 1) cantidadSeleccionada--
+                                    }
+                                ) {
+                                    Icon(Icons.Default.Remove, contentDescription = "Reducir")
                                 }
                                 Text(
-                                    "$cantidadSeleccionada",
+                                    text = "$cantidadSeleccionada",
                                     style = MaterialTheme.typography.headlineSmall
                                 )
-                                IconButton(onClick = {
-                                    if (cantidadSeleccionada < producto!!.cantidadDisponible)
-                                        cantidadSeleccionada++
-                                }) {
-                                    Icon(Icons.Default.Add, "Aumentar")
+                                IconButton(
+                                    onClick = {
+                                        if (cantidadSeleccionada < p.cantidadDisponible)
+                                            cantidadSeleccionada++
+                                    }
+                                ) {
+                                    Icon(Icons.Default.Add, contentDescription = "Aumentar")
                                 }
                             }
                         }
                     }
                 }
+
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -186,7 +192,7 @@ fun DetalleProductoScreen(
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Button(
-                        onClick = { onVerMapa() },
+                        onClick = onVerMapa,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(48.dp),
@@ -196,13 +202,16 @@ fun DetalleProductoScreen(
                         Spacer(modifier = Modifier.width(8.dp))
                         Text("Ver en mapa")
                     }
+
                     Button(
                         onClick = {
                             carritoViewModel.agregarProducto(
-                                producto!!.idProducto,
-                                producto!!.nombre,
-                                precioClp.toFloat(),
-                                producto!!.categoria
+                                productoId = p.idProducto,
+                                nombre = p.nombre,
+                                precio = precioClp.toFloat(),   // mantienes CLP
+                                categoria = p.categoria,
+                                cantidad = cantidadSeleccionada,
+                                imagenUrl = p.imagenUrl        // se usa la url real
                             )
                             Toast.makeText(
                                 context,
@@ -214,15 +223,20 @@ fun DetalleProductoScreen(
                             .fillMaxWidth()
                             .height(48.dp)
                     ) {
-                        Icon(Icons.Default.ShoppingCart, contentDescription = null)
+                        Icon(
+                            imageVector = Icons.Default.ShoppingCart,
+                            contentDescription = null
+                        )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("Agregar al carrito")
+                        Text(text = "Agregar al carrito")
                     }
                 }
             }
         } else {
             Box(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding),
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator()

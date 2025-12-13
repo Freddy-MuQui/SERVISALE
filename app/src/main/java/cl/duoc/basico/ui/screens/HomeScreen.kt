@@ -163,14 +163,16 @@ fun HomeScreen(
                                             "Agregado a favoritos"
                                     )
                                 },
-                                onAgregarCarrito = { productoSeleccionado ->
+                                onAgregarCarrito = { productoSeleccionado, cantidad ->
                                     carritoViewModel.agregarProducto(
                                         productoSeleccionado.idProducto,
                                         productoSeleccionado.nombre,
                                         productoSeleccionado.precio,
-                                        productoSeleccionado.categoria
+                                        productoSeleccionado.categoria,
+                                        cantidad,
+                                        productoSeleccionado.imagenUrl   // NUEVO
                                     )
-                                    showSnackbar("Producto agregado al carrito")
+                                    showSnackbar("Producto(s) agregado(s) al carrito")
                                 },
                                 onNavigateToDetalle = { onNavigateToDetalle(producto.idProducto) },
                                 showSnackbar = { msg -> showSnackbar(msg) }
