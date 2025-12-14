@@ -1,6 +1,5 @@
 # SERVISALE
-Desarrollo APP Movile
-📋 Descripción del Proyecto
+📋 Descripción:
 SERVISALE es una aplicación móvil innovadora dedicada al servicio de búsqueda y comparación de productos en tiendas físicas. La aplicación permite a los usuarios encontrar rápidamente productos de diversas categorías (alimentos, ropa, accesorios, etc.) en supermercados y tiendas de su zona, comparando precios y disponibilidad en tiempo real.
 
 🎯 Objetivo Principal
@@ -302,7 +301,7 @@ Próximas Mejoras
  Modo offline mejorado
 
 📄 Licencia
-Este proyecto es desarrollado con fines educativos para la asignatura DSY1105 del Instituto Profesional AIEP.
+Este proyecto es desarrollado con fines educativos para la asignatura DSY1105 del Instituto Profesional DUOC UC San Joaquin.
 
 📞 Contacto
 Para consultas sobre el proyecto:
@@ -312,7 +311,7 @@ Freddy Muñoz: [correo/github]
 Vicente Maulen: [correo/github]
 
 🙏 Agradecimientos
-Instituto Profesional AIEP
+Instituto Profesional DUOC UC San Joaquin
 
 Docente de la asignatura DSY1105
 
