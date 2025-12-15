@@ -2,8 +2,18 @@ package cl.duoc.basico.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,7 +32,7 @@ fun PerfilScreen(
                 title = { Text("Mi Perfil") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.Default.ArrowBack, "Volver")
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Volver")
                     }
                 }
             )
@@ -45,35 +55,9 @@ fun PerfilScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             Text(
-                usuarioEmail,
+                text = usuarioEmail,
                 style = MaterialTheme.typography.titleLarge
             )
-
-            Spacer(modifier = Modifier.height(32.dp))
-
-            Card(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    ProfileMenuItem(
-                        icon = Icons.Default.Person,
-                        title = "Editar perfil",
-                        onClick = { /* TODO */ }
-                    )
-                    Divider(modifier = Modifier.padding(vertical = 8.dp))
-                    ProfileMenuItem(
-                        icon = Icons.Default.Notifications,
-                        title = "Notificaciones",
-                        onClick = { /* TODO */ }
-                    )
-                    Divider(modifier = Modifier.padding(vertical = 8.dp))
-                    ProfileMenuItem(
-                        icon = Icons.Default.Settings,
-                        title = "Configuración",
-                        onClick = { /* TODO */ }
-                    )
-                }
-            }
 
             Spacer(modifier = Modifier.weight(1f))
 
@@ -89,24 +73,5 @@ fun PerfilScreen(
                 Text("Cerrar Sesión")
             }
         }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ProfileMenuItem(
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
-    title: String,
-    onClick: () -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Icon(icon, contentDescription = null)
-        Spacer(modifier = Modifier.width(16.dp))
-        Text(title, style = MaterialTheme.typography.bodyLarge)
     }
 }
