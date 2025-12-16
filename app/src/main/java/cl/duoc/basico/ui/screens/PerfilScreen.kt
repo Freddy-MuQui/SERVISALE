@@ -36,15 +36,6 @@ fun PerfilScreen(
             Spacer(modifier = Modifier.height(24.dp))
             Text(usuarioEmail, style = MaterialTheme.typography.titleLarge)
             Spacer(modifier = Modifier.height(32.dp))
-            Card(modifier = Modifier.fillMaxWidth()) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    ProfileMenuItem(Icons.Default.Person, "Editar perfil", onClick = { /* TODO: navegación futura */ })
-                    Divider(modifier = Modifier.padding(vertical = 8.dp))
-                    ProfileMenuItem(Icons.Default.Notifications, "Notificaciones", onClick = { /* TODO: navegación futura */ })
-                    Divider(modifier = Modifier.padding(vertical = 8.dp))
-                    ProfileMenuItem(Icons.Default.Settings, "Configuración", onClick = { /* TODO: navegación futura */ })
-                }
-            }
             Spacer(modifier = Modifier.weight(1f))
             Button(
                 onClick = onLogout,
