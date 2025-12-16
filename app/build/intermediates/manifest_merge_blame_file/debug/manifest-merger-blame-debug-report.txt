@@ -1,0 +1,202 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="cl.duoc.basico"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="36" />
+10
+11    <!-- Include required permissions for Google Maps API to run. -->
+12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+12-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\vicen\.gradle\caches\8.13\transforms\73e7c6394df48cc7ac14cc6aa18598f6\transformed\play-services-maps-18.2.0\AndroidManifest.xml:23:5-79
+12-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\vicen\.gradle\caches\8.13\transforms\73e7c6394df48cc7ac14cc6aa18598f6\transformed\play-services-maps-18.2.0\AndroidManifest.xml:23:22-76
+13    <uses-permission android:name="android.permission.INTERNET" />
+13-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\vicen\.gradle\caches\8.13\transforms\73e7c6394df48cc7ac14cc6aa18598f6\transformed\play-services-maps-18.2.0\AndroidManifest.xml:24:5-67
+13-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\vicen\.gradle\caches\8.13\transforms\73e7c6394df48cc7ac14cc6aa18598f6\transformed\play-services-maps-18.2.0\AndroidManifest.xml:24:22-64
+14
+15    <uses-feature
+15-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\vicen\.gradle\caches\8.13\transforms\73e7c6394df48cc7ac14cc6aa18598f6\transformed\play-services-maps-18.2.0\AndroidManifest.xml:26:5-28:35
+16        android:glEsVersion="0x00020000"
+16-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\vicen\.gradle\caches\8.13\transforms\73e7c6394df48cc7ac14cc6aa18598f6\transformed\play-services-maps-18.2.0\AndroidManifest.xml:27:9-41
+17        android:required="true" />
+17-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\vicen\.gradle\caches\8.13\transforms\73e7c6394df48cc7ac14cc6aa18598f6\transformed\play-services-maps-18.2.0\AndroidManifest.xml:28:9-32
+18
+19    <queries>
+19-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\vicen\.gradle\caches\8.13\transforms\73e7c6394df48cc7ac14cc6aa18598f6\transformed\play-services-maps-18.2.0\AndroidManifest.xml:30:5-34:15
+20
+21        <!-- Needs to be explicitly declared on Android R+ -->
+22        <package android:name="com.google.android.apps.maps" />
+22-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\vicen\.gradle\caches\8.13\transforms\73e7c6394df48cc7ac14cc6aa18598f6\transformed\play-services-maps-18.2.0\AndroidManifest.xml:33:9-64
+22-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\vicen\.gradle\caches\8.13\transforms\73e7c6394df48cc7ac14cc6aa18598f6\transformed\play-services-maps-18.2.0\AndroidManifest.xml:33:18-61
+23    </queries>
+24
+25    <permission
+25-->[androidx.core:core:1.12.0] C:\Users\vicen\.gradle\caches\8.13\transforms\188c61684dbaf317185ea08120f3cba0\transformed\core-1.12.0\AndroidManifest.xml:22:5-24:47
+26        android:name="cl.duoc.basico.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+26-->[androidx.core:core:1.12.0] C:\Users\vicen\.gradle\caches\8.13\transforms\188c61684dbaf317185ea08120f3cba0\transformed\core-1.12.0\AndroidManifest.xml:23:9-81
+27        android:protectionLevel="signature" />
+27-->[androidx.core:core:1.12.0] C:\Users\vicen\.gradle\caches\8.13\transforms\188c61684dbaf317185ea08120f3cba0\transformed\core-1.12.0\AndroidManifest.xml:24:9-44
+28
+29    <uses-permission android:name="cl.duoc.basico.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+29-->[androidx.core:core:1.12.0] C:\Users\vicen\.gradle\caches\8.13\transforms\188c61684dbaf317185ea08120f3cba0\transformed\core-1.12.0\AndroidManifest.xml:26:5-97
+29-->[androidx.core:core:1.12.0] C:\Users\vicen\.gradle\caches\8.13\transforms\188c61684dbaf317185ea08120f3cba0\transformed\core-1.12.0\AndroidManifest.xml:26:22-94
+30
+31    <application
+31-->C:\Users\vicen\Downloads\SERVISALE-test-validaciones\SERVISALE-test-validaciones\AppSupermarket\AppSupermarket\app\src\main\AndroidManifest.xml:5:5-25:19
+32        android:allowBackup="true"
+32-->C:\Users\vicen\Downloads\SERVISALE-test-validaciones\SERVISALE-test-validaciones\AppSupermarket\AppSupermarket\app\src\main\AndroidManifest.xml:6:9-35
+33        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+33-->[androidx.core:core:1.12.0] C:\Users\vicen\.gradle\caches\8.13\transforms\188c61684dbaf317185ea08120f3cba0\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
+34        android:dataExtractionRules="@xml/data_extraction_rules"
+34-->C:\Users\vicen\Downloads\SERVISALE-test-validaciones\SERVISALE-test-validaciones\AppSupermarket\AppSupermarket\app\src\main\AndroidManifest.xml:7:9-65
+35        android:debuggable="true"
+36        android:extractNativeLibs="false"
+37        android:fullBackupContent="@xml/backup_rules"
+37-->C:\Users\vicen\Downloads\SERVISALE-test-validaciones\SERVISALE-test-validaciones\AppSupermarket\AppSupermarket\app\src\main\AndroidManifest.xml:8:9-54
+38        android:icon="@mipmap/ic_launcher"
+38-->C:\Users\vicen\Downloads\SERVISALE-test-validaciones\SERVISALE-test-validaciones\AppSupermarket\AppSupermarket\app\src\main\AndroidManifest.xml:9:9-43
+39        android:label="@string/app_name"
+39-->C:\Users\vicen\Downloads\SERVISALE-test-validaciones\SERVISALE-test-validaciones\AppSupermarket\AppSupermarket\app\src\main\AndroidManifest.xml:10:9-41
+40        android:roundIcon="@mipmap/ic_launcher_round"
+40-->C:\Users\vicen\Downloads\SERVISALE-test-validaciones\SERVISALE-test-validaciones\AppSupermarket\AppSupermarket\app\src\main\AndroidManifest.xml:11:9-54
+41        android:supportsRtl="true"
+41-->C:\Users\vicen\Downloads\SERVISALE-test-validaciones\SERVISALE-test-validaciones\AppSupermarket\AppSupermarket\app\src\main\AndroidManifest.xml:12:9-35
+42        android:theme="@style/Theme.AppSupermarket" >
+42-->C:\Users\vicen\Downloads\SERVISALE-test-validaciones\SERVISALE-test-validaciones\AppSupermarket\AppSupermarket\app\src\main\AndroidManifest.xml:13:9-52
+43        <activity
+43-->C:\Users\vicen\Downloads\SERVISALE-test-validaciones\SERVISALE-test-validaciones\AppSupermarket\AppSupermarket\app\src\main\AndroidManifest.xml:14:9-24:20
+44            android:name="cl.duoc.basico.MainActivity"
+44-->C:\Users\vicen\Downloads\SERVISALE-test-validaciones\SERVISALE-test-validaciones\AppSupermarket\AppSupermarket\app\src\main\AndroidManifest.xml:15:13-41
+45            android:exported="true"
+45-->C:\Users\vicen\Downloads\SERVISALE-test-validaciones\SERVISALE-test-validaciones\AppSupermarket\AppSupermarket\app\src\main\AndroidManifest.xml:16:13-36
+46            android:label="@string/app_name"
+46-->C:\Users\vicen\Downloads\SERVISALE-test-validaciones\SERVISALE-test-validaciones\AppSupermarket\AppSupermarket\app\src\main\AndroidManifest.xml:17:13-45
+47            android:theme="@style/Theme.AppSupermarket" >
+47-->C:\Users\vicen\Downloads\SERVISALE-test-validaciones\SERVISALE-test-validaciones\AppSupermarket\AppSupermarket\app\src\main\AndroidManifest.xml:18:13-56
+48            <intent-filter>
+48-->C:\Users\vicen\Downloads\SERVISALE-test-validaciones\SERVISALE-test-validaciones\AppSupermarket\AppSupermarket\app\src\main\AndroidManifest.xml:19:13-23:29
+49                <action android:name="android.intent.action.MAIN" />
+49-->C:\Users\vicen\Downloads\SERVISALE-test-validaciones\SERVISALE-test-validaciones\AppSupermarket\AppSupermarket\app\src\main\AndroidManifest.xml:20:17-69
+49-->C:\Users\vicen\Downloads\SERVISALE-test-validaciones\SERVISALE-test-validaciones\AppSupermarket\AppSupermarket\app\src\main\AndroidManifest.xml:20:25-66
+50
+51                <category android:name="android.intent.category.LAUNCHER" />
+51-->C:\Users\vicen\Downloads\SERVISALE-test-validaciones\SERVISALE-test-validaciones\AppSupermarket\AppSupermarket\app\src\main\AndroidManifest.xml:22:17-77
+51-->C:\Users\vicen\Downloads\SERVISALE-test-validaciones\SERVISALE-test-validaciones\AppSupermarket\AppSupermarket\app\src\main\AndroidManifest.xml:22:27-74
+52            </intent-filter>
+53        </activity>
+54        <!-- Needs to be explicitly declared on P+ -->
+55        <uses-library
+55-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\vicen\.gradle\caches\8.13\transforms\73e7c6394df48cc7ac14cc6aa18598f6\transformed\play-services-maps-18.2.0\AndroidManifest.xml:39:9-41:40
+56            android:name="org.apache.http.legacy"
+56-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\vicen\.gradle\caches\8.13\transforms\73e7c6394df48cc7ac14cc6aa18598f6\transformed\play-services-maps-18.2.0\AndroidManifest.xml:40:13-50
+57            android:required="false" />
+57-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\vicen\.gradle\caches\8.13\transforms\73e7c6394df48cc7ac14cc6aa18598f6\transformed\play-services-maps-18.2.0\AndroidManifest.xml:41:13-37
+58
+59        <activity
+59-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\vicen\.gradle\caches\8.13\transforms\6cd385b57fc61c8b1d1d2ef774f88bcb\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+60            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+60-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\vicen\.gradle\caches\8.13\transforms\6cd385b57fc61c8b1d1d2ef774f88bcb\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+61            android:exported="false"
+61-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\vicen\.gradle\caches\8.13\transforms\6cd385b57fc61c8b1d1d2ef774f88bcb\transformed\play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+62            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+62-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\vicen\.gradle\caches\8.13\transforms\6cd385b57fc61c8b1d1d2ef774f88bcb\transformed\play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+63
+64        <meta-data
+64-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\vicen\.gradle\caches\8.13\transforms\afdb18421103fdea6d43ed16af84ae17\transformed\play-services-basement-18.0.0\AndroidManifest.xml:21:9-23:69
+65            android:name="com.google.android.gms.version"
+65-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\vicen\.gradle\caches\8.13\transforms\afdb18421103fdea6d43ed16af84ae17\transformed\play-services-basement-18.0.0\AndroidManifest.xml:22:13-58
+66            android:value="@integer/google_play_services_version" />
+66-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\vicen\.gradle\caches\8.13\transforms\afdb18421103fdea6d43ed16af84ae17\transformed\play-services-basement-18.0.0\AndroidManifest.xml:23:13-66
+67
+68        <activity
+68-->[androidx.compose.ui:ui-test-manifest:1.5.4] C:\Users\vicen\.gradle\caches\8.13\transforms\2a35cdd3b6bdec1c92a157523d324ad0\transformed\ui-test-manifest-1.5.4\AndroidManifest.xml:23:9-25:39
+69            android:name="androidx.activity.ComponentActivity"
+69-->[androidx.compose.ui:ui-test-manifest:1.5.4] C:\Users\vicen\.gradle\caches\8.13\transforms\2a35cdd3b6bdec1c92a157523d324ad0\transformed\ui-test-manifest-1.5.4\AndroidManifest.xml:24:13-63
+70            android:exported="true" />
+70-->[androidx.compose.ui:ui-test-manifest:1.5.4] C:\Users\vicen\.gradle\caches\8.13\transforms\2a35cdd3b6bdec1c92a157523d324ad0\transformed\ui-test-manifest-1.5.4\AndroidManifest.xml:25:13-36
+71        <activity
+71-->[androidx.compose.ui:ui-tooling-android:1.5.4] C:\Users\vicen\.gradle\caches\8.13\transforms\ba65b08e96422969dc77cae2ea01dd44\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
+72            android:name="androidx.compose.ui.tooling.PreviewActivity"
+72-->[androidx.compose.ui:ui-tooling-android:1.5.4] C:\Users\vicen\.gradle\caches\8.13\transforms\ba65b08e96422969dc77cae2ea01dd44\transformed\ui-tooling-release\AndroidManifest.xml:24:13-71
+73            android:exported="true" />
+73-->[androidx.compose.ui:ui-tooling-android:1.5.4] C:\Users\vicen\.gradle\caches\8.13\transforms\ba65b08e96422969dc77cae2ea01dd44\transformed\ui-tooling-release\AndroidManifest.xml:25:13-36
+74
+75        <provider
+75-->[androidx.emoji2:emoji2:1.4.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f89d965f530d897b627f1cafb783152b\transformed\emoji2-1.4.0\AndroidManifest.xml:24:9-32:20
+76            android:name="androidx.startup.InitializationProvider"
+76-->[androidx.emoji2:emoji2:1.4.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f89d965f530d897b627f1cafb783152b\transformed\emoji2-1.4.0\AndroidManifest.xml:25:13-67
+77            android:authorities="cl.duoc.basico.androidx-startup"
+77-->[androidx.emoji2:emoji2:1.4.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f89d965f530d897b627f1cafb783152b\transformed\emoji2-1.4.0\AndroidManifest.xml:26:13-68
+78            android:exported="false" >
+78-->[androidx.emoji2:emoji2:1.4.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f89d965f530d897b627f1cafb783152b\transformed\emoji2-1.4.0\AndroidManifest.xml:27:13-37
+79            <meta-data
+79-->[androidx.emoji2:emoji2:1.4.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f89d965f530d897b627f1cafb783152b\transformed\emoji2-1.4.0\AndroidManifest.xml:29:13-31:52
+80                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+80-->[androidx.emoji2:emoji2:1.4.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f89d965f530d897b627f1cafb783152b\transformed\emoji2-1.4.0\AndroidManifest.xml:30:17-75
+81                android:value="androidx.startup" />
+81-->[androidx.emoji2:emoji2:1.4.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f89d965f530d897b627f1cafb783152b\transformed\emoji2-1.4.0\AndroidManifest.xml:31:17-49
+82            <meta-data
+82-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\vicen\.gradle\caches\8.13\transforms\2b5ebcc0f37dab065db48000eef6e562\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:29:13-31:52
+83                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+83-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\vicen\.gradle\caches\8.13\transforms\2b5ebcc0f37dab065db48000eef6e562\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:30:17-78
+84                android:value="androidx.startup" />
+84-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\vicen\.gradle\caches\8.13\transforms\2b5ebcc0f37dab065db48000eef6e562\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:31:17-49
+85            <meta-data
+85-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+86                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+86-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+87                android:value="androidx.startup" />
+87-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+88        </provider>
+89
+90        <service
+90-->[androidx.room:room-runtime:2.6.1] C:\Users\vicen\.gradle\caches\8.13\transforms\0a61529c936e0d84ba9fba28bcf8c4d2\transformed\room-runtime-2.6.1\AndroidManifest.xml:24:9-28:63
+91            android:name="androidx.room.MultiInstanceInvalidationService"
+91-->[androidx.room:room-runtime:2.6.1] C:\Users\vicen\.gradle\caches\8.13\transforms\0a61529c936e0d84ba9fba28bcf8c4d2\transformed\room-runtime-2.6.1\AndroidManifest.xml:25:13-74
+92            android:directBootAware="true"
+92-->[androidx.room:room-runtime:2.6.1] C:\Users\vicen\.gradle\caches\8.13\transforms\0a61529c936e0d84ba9fba28bcf8c4d2\transformed\room-runtime-2.6.1\AndroidManifest.xml:26:13-43
+93            android:exported="false" />
+93-->[androidx.room:room-runtime:2.6.1] C:\Users\vicen\.gradle\caches\8.13\transforms\0a61529c936e0d84ba9fba28bcf8c4d2\transformed\room-runtime-2.6.1\AndroidManifest.xml:27:13-37
+94
+95        <receiver
+95-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+96            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+96-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+97            android:directBootAware="false"
+97-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+98            android:enabled="true"
+98-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+99            android:exported="true"
+99-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+100            android:permission="android.permission.DUMP" >
+100-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+101            <intent-filter>
+101-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+102                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+102-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+102-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+103            </intent-filter>
+104            <intent-filter>
+104-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+105                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+105-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+105-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+106            </intent-filter>
+107            <intent-filter>
+107-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+108                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+108-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+108-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+109            </intent-filter>
+110            <intent-filter>
+110-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+111                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+111-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+111-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\vicen\.gradle\caches\8.13\transforms\f0e19f237fcede73ddd8f6cdcdfe65e1\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+112            </intent-filter>
+113        </receiver>
+114    </application>
+115
+116</manifest>
